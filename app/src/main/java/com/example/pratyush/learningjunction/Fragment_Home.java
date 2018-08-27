@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebViewFragment;
 import android.widget.ImageButton;
 
-public class Fragment_Home extends Fragment {
-
+public class Fragment_Home extends Fragment{
     ImageButton java, python,html,css,sql,js;
 
     @Nullable

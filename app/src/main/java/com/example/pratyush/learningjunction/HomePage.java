@@ -1,5 +1,7 @@
 package com.example.pratyush.learningjunction;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -52,10 +54,28 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Fragment_Discussion()).commit();
                 break;
             case R.id.nav_share:
-                Toast.makeText(this,"Share",Toast.LENGTH_SHORT).show();
+                try {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_SUBJECT, "My application name");
+                    String sAux = "\nLet me recommend you this application\n\n";
+                    sAux = sAux + "https://play.google.com/store/apps/details?id=the.package.id \n\n";
+                    i.putExtra(Intent.EXTRA_TEXT, sAux);
+                    startActivity(Intent.createChooser(i, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
                 break;
             case R.id.nav_send:
-                Toast.makeText(this,"Send",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","space4pratyush@gmail.com", null));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Your Suggestion or Complaint");
+                if (intent.resolveActivity(this.getPackageManager()) != null) {
+                    this.startActivity(Intent.createChooser(intent, "Send Email using:"));
+                }
+                else {
+                    Toast.makeText(this, "You don't have any email apps to contact us.", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
