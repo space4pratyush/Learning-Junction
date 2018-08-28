@@ -38,7 +38,7 @@ public class Fragment_Mynotes extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog d = new Dialog(getActivity());
+                final Dialog d = new Dialog(getActivity());
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 d.setContentView(R.layout.layout_custom_dialog);
                 title = d.findViewById(R.id.title);
@@ -49,6 +49,7 @@ public class Fragment_Mynotes extends Fragment {
                     @Override
                     public void onClick(View v) {
                         save(title.getText().toString(), description.getText().toString());
+                        d.dismiss();
                     }
                 });
                 retrieve.setOnClickListener(new View.OnClickListener() {
